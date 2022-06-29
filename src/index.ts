@@ -33,6 +33,7 @@ const iterateBodyStatements = (statements: Statement[]): string[] =>
           return iterateMustacheStatement(statement as MustacheStatement)
         // Block Statements contain anything inside a block.
         case 'BlockStatement':
+          return iterateBlock(statement as BlockStatement)
         // Decorators Blocks contain anything in the block statement (ie: variables used for a condition)
         case 'DecoratorBlock':
           return iterateBlock(statement as BlockStatement)
@@ -93,9 +94,7 @@ const iterateMustacheStatement = ({
 /**
  * Iterate through a list of expression to find all variables in compatible expression types
  */
-const iterateExpressions = (
-  expression: Expression[],
-): string[] =>
+const iterateExpressions = (expression: Expression[]): string[] =>
   expression
     // Remove any non PathExpression Object, since others don't store variables
     .filter(({ type }) => type === 'PathExpression')
