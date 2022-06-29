@@ -36,7 +36,7 @@ const iterateBodyStatements = (statements: Statement[]): string[] =>
           return iterateBlock(statement as BlockStatement)
         // Decorators Blocks contain anything in the block statement (ie: variables used for a condition)
         case 'DecoratorBlock':
-          return iterateBlock(statement as BlockStatement)
+          return iterateBlock(statement as DecoratorBlock)
         default:
           return []
       }
