@@ -10,7 +10,7 @@ import Program = hbs.AST.Program
 import Statement = hbs.AST.Statement
 import Expression = hbs.AST.Expression
 
-const getHandlebarsVariables = (input: string): string[] => {
+const getHandleBarsVariables = (input: string): string[] => {
   // Root Handlebars program, a program represents a node inside Handlebars element tree.
   const ast: Program = parseWithoutProcessing(input)
 
@@ -106,7 +106,7 @@ const iterateExpressions = (expression: Expression[]): string[] =>
 const pathSample = join(__dirname, '../sample/sample_all.html')
 const sampleData = readFileSync(pathSample, 'utf-8')
 
-const result = getHandlebarsVariables(sampleData)
+const result = getHandleBarsVariables(sampleData)
 
 const pathResult = join(__dirname, '../result/result_sample_all.json')
 const resultString = JSON.stringify(result, null, 2)
