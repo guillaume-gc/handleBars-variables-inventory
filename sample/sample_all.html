@@ -69,4 +69,12 @@
 {{/inline}}
 Hello {{> inlineStatement1}}
 
+{{#each blockVariable9}}
+    {{#if blockVariable10}}
+        {{nestedVariable7}}
+    {{else}}
+        {{nestedVariable8}}
+    {{/if}}
+{{/each}}
+
 {{capitalizeFirst (lower subValue1)}}
