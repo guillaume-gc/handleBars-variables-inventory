@@ -1,5 +1,6 @@
 dist
 .idea
 node_modules
-result
+result/*
+!result/.gitkeep
 .DS_STORE
