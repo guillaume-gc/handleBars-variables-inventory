@@ -8,7 +8,7 @@ const getHandlebarsVariables = (input: string): string[] => {
   return iterateBodyStatements(ast.body)
 }
 
-const iterateBodyStatements = (bodyStatements: hbs.AST.Statement[]) =>
+const iterateBodyStatements = (bodyStatements: hbs.AST.Statement[]): string[] =>
   bodyStatements
     .map((statement: hbs.AST.Statement) => {
       switch (statement.type) {
@@ -26,31 +26,39 @@ const iterateBodyStatements = (bodyStatements: hbs.AST.Statement[]) =>
     .filter((expression) => expression)
 
 const iterateBlockStatement = (statement: hbs.AST.BlockStatement): string[] => {
+  const paramsExpressions = statement.params as hbs.AST.PathExpression[]
+
   const defaultValue = {
     body: [],
   }
   const { program = defaultValue, inverse = defaultValue } = statement
   const fullBody = [...program.body, ...inverse.body]
 
-  return iterateBodyStatements(fullBody)
+  return [
+    ...iteratePathExpressions(paramsExpressions),
+    ...iterateBodyStatements(fullBody),
+  ]
 }
 
 const iterateMustacheStatement = (
   statement: hbs.AST.MustacheStatement,
 ): string[] => {
-  const paramsExpressionList = statement.params as hbs.AST.PathExpression[]
-  const pathExpression = statement.path as hbs.AST.PathExpression
+  let pathExpressions
+  if (statement.params.length) {
+    pathExpressions = statement.params as hbs.AST.PathExpression[]
+  }
+  else {
+    pathExpressions = [statement.path] as hbs.AST.PathExpression[]
+  }
 
-  if (paramsExpressionList.length) {
-    return paramsExpressionList
-      .filter((expression) => expression.type === 'PathExpression')
-      .map((expression) => expression.original)
-  }
-  if (pathExpression.original && pathExpression.type === 'PathExpression') {
-    return [pathExpression.original]
-  }
-  return []
+  return iteratePathExpressions(pathExpressions)
 }
+
+const iteratePathExpressions = (pathExpressions: hbs.AST.PathExpression[]): string[] => (
+  pathExpressions
+      .filter(({type}) => type === 'PathExpression')
+      .map((expression) => expression.original)
+)
 
 const path = join(__dirname, '/../sample/sample_all.html')
 const sampleData = readFileSync(path, 'utf8')
