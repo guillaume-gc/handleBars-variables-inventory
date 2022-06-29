@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "watch": "npx tsc -w",
+    "run": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  }
+}
