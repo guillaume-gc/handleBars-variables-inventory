@@ -31,10 +31,10 @@ const iterateBodyStatements = (statements: Statement[]): string[] =>
         // Mustache Statements contain a variable
         case 'MustacheStatement':
           return iterateMustacheStatement(statement as MustacheStatement)
-        // Block Statements contain anything inside a block.
+        // Block Statements contain anything nested inside a block.
         case 'BlockStatement':
           return iterateBlock(statement as BlockStatement)
-        // Decorators Blocks contain anything in the block statement (ie: variables used for a condition)
+        // Decorators Blocks contain anything in the block statement itself (ie: variables used for a condition)
         case 'DecoratorBlock':
           return iterateBlock(statement as DecoratorBlock)
         default:
