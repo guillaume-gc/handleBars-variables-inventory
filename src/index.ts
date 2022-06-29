@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import Handlebars from 'handlebars'
 import { join } from 'path'
 
@@ -104,9 +104,13 @@ const iterateExpressions = (
       return pathExpression.original
     })
 
-const path = join(__dirname, '../sample/sample_all.html')
-const sampleData = readFileSync(path, 'utf8')
+const pathSample = join(__dirname, '../sample/sample_all.html')
+const sampleData = readFileSync(pathSample, 'utf-8')
 
 const result = getHandlebarsVariables(sampleData)
+
+const pathResult = join(__dirname, '../result/result_sample_all.json')
+const resultString = JSON.stringify(result, null, 2)
+writeFileSync(pathResult, resultString, 'utf-8')
 
 console.log(result)
