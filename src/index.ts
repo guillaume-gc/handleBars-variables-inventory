@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs'
-import Handlebars from 'handlebars'
+import { parseWithoutProcessing } from 'handlebars'
 import { join } from 'path'
 
 import DecoratorBlock = hbs.AST.DecoratorBlock
@@ -12,7 +12,7 @@ import Expression = hbs.AST.Expression
 
 const getHandlebarsVariables = (input: string): string[] => {
   // Root Handlebars program, a program represents a node inside Handlebars element tree.
-  const ast: Program = Handlebars.parseWithoutProcessing(input)
+  const ast: Program = parseWithoutProcessing(input)
 
   // A body include all nested elements.
   return iterateBodyStatements(ast.body)
