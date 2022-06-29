@@ -61,6 +61,11 @@
 
 {{#* inline "inlineStatement1"}}
     {{inlineValue1}}
+    {{#if blockVariable8}}
+        {{inlineValue2}}
+    {{else}}
+        {{inlineValue3}}
+    {{/if}}
 {{/inline}}
 Hello {{> inlineStatement1}}
 
