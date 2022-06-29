@@ -1,17 +1,21 @@
 {{#each value1}}
-    test1
+    {{test1}}
 {{/each}}
 
 {{#if value2}}
-    test2
+    {{test2}}
 {{else}}
-    test3
+    {{test3}}
 {{/if}}
 
 {{#and value3 value4}}
-    test4
+    {{test4}}
 {{else}}
-    test5
+    {{#if value2}}
+        {{test5}}
+    {{else}}
+        {{test6}}
+    {{/if}}
 {{/and}}
 
 {{abbreviate value5 1}} – Truncates a value.
@@ -20,14 +24,14 @@
 {{center value8 size=2 pad=" "}} – Centers a value.
 {{cut value9 "test"}} – Cuts a value.
 {{dateFormat value10 inputFormat="MM/dd/yyyy" outputFormat="full" tz=America/Los_Angeles}} – Sets the date style.
-{{inflect value11 value11s value11ss includeCount=false}} – Returns a singular or plural string based on the count.
+{{inflect value11 "value11s" "value11ss" includeCount=false}} – Returns a singular or plural string based on the count.
 {{join value12 " // " prefix="" suffix=""}} – Joins an array, iterator, or an iterable object.
 {{ljust value13 4 pad=" "}} – Justifies a value to the left margin.
 {{lower value14 5 pad=" "}} – Converts a value to lower case.
 {{now "medium" tz=America/Los_Angeles}} – Prints the current date.
 {{ordinalize value15}} – Ordinalizes a numeric value.
 {{replace value16 " " "-"}} – Replaces one string with another.
-{{rjust value17 6 [pad=" "]}} – Justifies a value to the right margin.
+{{rjust value17 6 pad=" "}} – Justifies a value to the right margin.
 {{slugify value18}} – Converts a value to lower case and removes non-word characters, converts spaces to hyphens, and removes trailing white space.
 {{stripTags value19}} – Strips [X]HTML tags from a value.
 {{substring value20 7 8}} – Returns a new string as a substring of a passed value.
@@ -41,17 +45,17 @@
 {{encode64 value29}} – Encodes a string using Base64.
 {{floor value30}} – Rounds an integer to its mathematical floor.
 {{md5 value31}} – Hashes a passed string using the MD5 algorithm.
-{{modulo value31 value32}} – Returns the remainder of two numbers using floaing points.
-{{multiply value33 value34}} – Returns the product of two numbers.
-{{round value35}} – Rounds a decimal to the nearest whole number.
-{{sha256 value36}} – Hashes a passed string using SHA-256.
-{{sha512 value37}} – Hashes a passed string using SHA-512.
-{{subtract value38 value39}} – Returns the difference of two numbers.
-{{uuid value40}} – Randomly generates a UUID in a 128-bit format.
+{{modulo value32 value33}} – Returns the remainder of two numbers using floaing points.
+{{multiply value34 value35}} – Returns the product of two numbers.
+{{round value36}} – Rounds a decimal to the nearest whole number.
+{{sha256 value37}} – Hashes a passed string using SHA-256.
+{{sha512 value38}} – Hashes a passed string using SHA-512.
+{{subtract value39 value40}} – Returns the difference of two numbers.
+{{uuid value41}} – Randomly generates a UUID in a 128-bit format.
 
 {{#* inline "fullName"}}
-    {{value41}}
+    {{value42}}
 {{/inline}}
 Hello {{> fullName}}
 
-{{capitalizeFirst (lower value41)}}
+{{capitalizeFirst (lower value43)}}
